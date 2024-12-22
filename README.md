@@ -1,10 +1,19 @@
-# Getting Started with Create React App
+# Setting up the application.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Step by step guide line to run the chat application
 
-## Available Scripts
 
-In the project directory, you can run:
+## API Key
+
+Enter the API keys in the .env file
+
+## Run flask application
+
+Enter the API keys in the .env file
+
+## Run react
+
+Enter `yarn start`
 
 ### `npm start`
 
