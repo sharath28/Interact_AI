@@ -6,7 +6,8 @@ Step by step guide line to run the chat application
 
 Enter the API keys in the .env file
 
-OPEN_AI_KEY = "API_KEY"
+OPEN_AI_KEY = "API_KEY" 
+
 ANTHROPIC_KEY = "API_KEY"
 
 ## Run flask application
@@ -14,7 +15,7 @@ ANTHROPIC_KEY = "API_KEY"
 Enter `flask run --debugger` to run the flask app
 This runs on [http://localhost:5000/](http://localhost:3000/)
 
-Apis in flask server
+**APIs in flask server**
 
 Gets a models from open ai - GET Request
 [http://localhost:5000/models_openai](http://localhost:5000/models_openai)
