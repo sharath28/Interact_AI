@@ -10,10 +10,10 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
 openAIKey = os.getenv('OPEN_AI_KEY')
 anthropicKey = os.getenv('ANTHROPIC_KEY')
 
+# Api to send a post request to the openai and anthropic apis
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json['message'] or ""
@@ -62,6 +62,7 @@ def chat():
     else:
         return jsonify({'response': "Please select a valid model"})
 
+# Api to Get all models in open ai
 @app.route('/models_openai')
 def models_openai():
     client = OpenAI(api_key=openAIKey)
@@ -73,6 +74,7 @@ def models_openai():
 
     return jsonify({'models': models_list})
 
+# Api to Get all models in anthropic
 @app.route('/models_anthropic')
 def models_anthropic():
     client = anthropic.Anthropic(api_key=anthropicKey)

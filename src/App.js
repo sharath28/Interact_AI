@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+    useState,
+    useEffect
+} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Stack from '@mui/material/Stack';
@@ -10,60 +13,68 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, {
+    SelectChangeEvent
+} from '@mui/material/Select';
 
 function App() {
 
-  const [message, setMessage] = useState('');
-  const [responseArr, setResponseArr] = useState([]);
+    const [message, setMessage] = useState('');
+    const [responseArr, setResponseArr] = useState([]);
 
-  const [value, setValue] = React.useState('fruit');
-  const [model, setModel] = React.useState('')
-  const [models_list, setModelsList] = useState([]);
-  const [mainModel, setMainModel] = useState('');
+    const [value, setValue] = React.useState('fruit');
+    const [model, setModel] = React.useState('')
+    const [models_list, setModelsList] = useState([]);
+    const [mainModel, setMainModel] = useState('');
 
-  useEffect(() => {
-    fetch('/models_openai').then(res => res.json()).then(data => {
-      setModelsList(data.models);
-    });
-  }, []);
+    useEffect(() => {
+        fetch('/models_openai').then(res => res.json()).then(data => {
+            setModelsList(data.models);
+        });
+    }, []);
 
- const handleChange = (event) => {
+    const handleChange = (event) => {
 
-   setModel(event.target.value);
+        setModel(event.target.value);
 
- };
+    };
 
- const handleModelChange = (event) => {
-   if (event.target.value === "openai") {
-     fetch('/models_openai').then(res => res.json()).then(data => {
-       setModelsList(data.models);
-     });
-   } else if  (event.target.value === "anthropic") {
-     fetch('/models_anthropic').then(res => res.json()).then(data => {
-       setModelsList(data.models);
-     });
-   } else {
-       setModelsList([]);
-   }
-   setMainModel(event.target.value);
+    const handleModelChange = (event) => {
+        if (event.target.value === "openai") {
+            fetch('/models_openai').then(res => res.json()).then(data => {
+                setModelsList(data.models);
+            });
+        } else if (event.target.value === "anthropic") {
+            fetch('/models_anthropic').then(res => res.json()).then(data => {
+                setModelsList(data.models);
+            });
+        } else {
+            setModelsList([]);
+        }
+        setMainModel(event.target.value);
 
- };
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const message_temp = "Query: " + message
-    setResponseArr(prevItems => [...prevItems, message_temp])
-    const res = await fetch('/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, model, mainModel })
-    });
-    const data = await res.json();
-    setMessage('');
-    const response_temp = "Response: " + data.response
-    setResponseArr(prevItems => [...prevItems, response_temp])
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const message_temp = "Query: " + message
+        setResponseArr(prevItems => [...prevItems, message_temp])
+        const res = await fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message,
+                model,
+                mainModel
+            })
+        });
+        const data = await res.json();
+        setMessage('');
+        const response_temp = "Response: " + data.response
+        setResponseArr(prevItems => [...prevItems, response_temp])
+    };
 
   return (
     <div style={{
